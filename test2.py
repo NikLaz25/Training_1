@@ -1,11 +1,11 @@
-def odometer(my_list):
+def odometer(oksana):
     distance = 0
-    for i in range(len(my_list) - 1):
+    for i in range(len(oksana) - 1):
         if i % 2 == 0:
-            speed = my_list[i]
+            speed = oksana[i]
             if i == 0:
-                time = my_list[i + 1]
+                time = oksana[i + 1]
             else:
-                time = my_list[i + 1] - my_list[i - 1]
+                time = oksana[i + 1] - oksana[i - 1]
             distance += speed * time
     return distance
