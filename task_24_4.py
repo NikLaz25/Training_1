@@ -9,18 +9,18 @@ def MatrixTurn(Matrix, M, N, T):
     def circ(circle_quantity, Matrix):
         '''циклом переводим круги в строки, и помещаем в список'''
         circles = []
-        for circle_i in range(circle_quantity):
+        for circle_i in range(circle_quantity): # сложность О(n)
             left_edge = circle_i
-            len_edge = (N  - circle_i*2)
+            len_edge = (N - circle_i*2)
             right_edge = left_edge + len_edge
             circle = Matrix[circle_i][left_edge:right_edge]
 
-            for i in Matrix[(circle_i + 1):(M - 1- circle_i)]:
+            for i in Matrix[(circle_i + 1):(M - 1- circle_i)]: #Сложность O(n*n)
                 circle += i[left_edge:right_edge][-1]
 
             circle += Matrix[M - 1 - circle_i][left_edge:right_edge][::-1]
 
-            for i in Matrix[(circle_i + 1):(M - 1- circle_i)][::-1]:
+            for i in Matrix[(circle_i + 1):(M - 1- circle_i)][::-1]: #Сложность O(n*n)
                 circle += i[left_edge:right_edge][0]
 
             circles += [circle]
@@ -31,8 +31,8 @@ def MatrixTurn(Matrix, M, N, T):
     def tern(circles, T):
         '''поворачиваем круги в цикле T раз'''
         turn = 1
-        while turn  <= T:
-            for circle_i, circle_val in enumerate(circles):
+        while turn  <= T:  #Сложность O(n)
+            for circle_i, circle_val in enumerate(circles):   #Сложность O(n*n)
                 last = circle_val[-1]
                 circles[circle_i] = circle_val[:-1]
                 circles[circle_i] = last + circles[circle_i]
@@ -49,13 +49,13 @@ def MatrixTurn(Matrix, M, N, T):
         # переводим список строк в список списков
         circles_list = []
         for val in circles:
-            circles_list += [list(val)]
+            circles_list += [list(val)]  #Сложность O(n)
 
         # создаем макет для повернутой матрицы
-        turn_matrix = [['0']*N for x in range(M)]
+        turn_matrix = [['0']*N for x in range(M)]  #Сложность O(n)
 
         # цикл записи кругов в макет матрицы
-        for circle_i, circle_val in enumerate(circles_list):
+        for circle_i, circle_val in enumerate(circles_list):  #Сложность O(n)
             left_edge = circle_i
             len_edge = (N - circle_i*2)
             right_edge = left_edge + len_edge
@@ -68,7 +68,7 @@ def MatrixTurn(Matrix, M, N, T):
             number_in_circle = len(turn_matrix[circle_i][left_edge:right_edge])
 
             #  проходимся циклом по правому краю круга для circles_list
-            for t_matrix_i, t_matrix_val in enumerate(turn_matrix):# определяем номера строк
+            for t_matrix_i, t_matrix_val in enumerate(turn_matrix):# определяем номера строк  #Сложность O(n*n)
                 if (M - 1 - circle_i) > t_matrix_i >= (circle_i + 1):
 
                     # заменяем последнее значение списка на нужный символ
@@ -86,7 +86,7 @@ def MatrixTurn(Matrix, M, N, T):
             number_in_circle = numb_in_cir_next
 
             # заполняем левую часть круга
-            for t_matrix_i in range(len(turn_matrix))[::-1]:  # определяем номера строк
+            for t_matrix_i in range(len(turn_matrix))[::-1]:  # определяем номера строк  #Сложность O(n*n)
                 if (M - 1 - circle_i) > t_matrix_i >= (circle_i + 1):
                     # заменяем последнее значение списка на нужный символ
                     turn_matrix[t_matrix_i][circle_i] = circle_val[number_in_circle]
@@ -98,10 +98,10 @@ def MatrixTurn(Matrix, M, N, T):
     turn_matrix = save_turn_matrix(circles)
 
     #  преобразуем список списков в список строк
-    for i, val in enumerate(turn_matrix):
+    for i, val in enumerate(turn_matrix):  #Сложность O(n)
         turn_matrix[i] = ''.join(val)
 
-    for i in range(len(Matrix)):
+    for i in range(len(Matrix)):   #Сложность O(n)
         Matrix[i] = turn_matrix[i]
 
     return
