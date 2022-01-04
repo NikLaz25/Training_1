@@ -16,12 +16,12 @@ def MatrixTurn(Matrix, M, N, T):
             circle = Matrix[circle_i][left_edge:right_edge]
 
             for i in Matrix[(circle_i + 1):(M - 1- circle_i)]: #Сложность O(n*n)
-                circle += i[left_edge:right_edge][-1]
+                circle += i[left_edge:right_edge][-1]  #Сложность O(n) в итоге O(n*n) * O(n) = O(n^3)
 
             circle += Matrix[M - 1 - circle_i][left_edge:right_edge][::-1]
 
             for i in Matrix[(circle_i + 1):(M - 1- circle_i)][::-1]: #Сложность O(n*n)
-                circle += i[left_edge:right_edge][0]
+                circle += i[left_edge:right_edge][0]  #Сложность O(n) в итоге O(n*n) * O(n) = O(n^3)
 
             circles += [circle]
         return circles
